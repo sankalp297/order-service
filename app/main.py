@@ -89,7 +89,7 @@ def create_order(product_id: str, quantity: int):
         # Reserve the stock
         httpx.put(
             f"{INVENTORY_URL}/inventory/{product_id}/reserve",
-            json={"quantity": quantity}
+            json={"quantity": quantity},
         )
     except Exception as e:
         return {"error": f"inventory service unavailable: {str(e)}"}
@@ -98,7 +98,7 @@ def create_order(product_id: str, quantity: int):
     orders[order_counter] = {
         "product_id": product_id,
         "quantity": quantity,
-        "status": "confirmed"
+        "status": "confirmed",
     }
     return {"order_id": order_counter, **orders[order_counter]}
 
